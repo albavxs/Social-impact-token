@@ -2,14 +2,16 @@
 [dev-dependencies]
 soroban-sdk = { version = "21.0.0", features = ["testutils"] }
 [package]
-name = "impact-contract"
+name = "impact_contract"
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
 publish = false
 
 [lib]
+name = "impact_contract"
 crate-type = ["cdylib"]   # gera o .wasm para deploy no Soroban
+path = "src/lib.rs"
 
 [dependencies]
 soroban-sdk = "21.0.0"        # versão atualizada do SDK (ajustar à release do hackathon)

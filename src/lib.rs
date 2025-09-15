@@ -1,7 +1,7 @@
 #![no_std]
 
 use soroban_sdk::token::TokenClient;
-use soroban_sdk::{contract, contractimpl, Address, Env, IntoVal, String};
+use soroban_sdk::{contract, contractimpl, Address, Env, IntoVal};
 
 mod error;
 mod events;

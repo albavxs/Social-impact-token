@@ -1,13 +1,9 @@
 #![cfg(test)]
 
 use soroban_sdk::token::TokenClient;
-use soroban_sdk::{
-    testutils::{Address as _, AuthorizedFunction, AuthorizedInvocation},
-    Address, Env, IntoVal, String,
-};
-use soroban_token_sdk::token::TokenContract;
+use soroban_sdk::{testutils::Address as _, Address, Env, IntoVal, String};
 
-use crate::{ImpactContract, ImpactContractClient};
+use impact_contract::{ImpactContract, ImpactContractClient};
 
 #[test]
 fn test_donation_flow() {
@@ -18,8 +14,11 @@ fn test_donation_flow() {
     let admin = Address::generate(&env);
     let donor = Address::generate(&env);
 
-    // Deploy do contrato do token USDC
-    let usdc_id = env.register_contract_wasm(None, TokenContract::WASM);
+    // Carregar o WASM do token padrão do arquivo
+    let wasm =
+        std::fs::read("wasm/soroban_token_contract.wasm").expect("WASM do token não encontrado");
+    let wasm_bytes = soroban_sdk::Bytes::from_slice(&env, &wasm);
+    let usdc_id = env.register_contract_wasm(None, wasm_bytes);
     let usdc_client = TokenClient::new(&env, &usdc_id);
 
     // Inicializar o token USDC
