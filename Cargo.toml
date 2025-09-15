@@ -1,6 +1,16 @@
+
+[dev-dependencies]
+soroban-sdk = { version = "21.0.0", features = ["testutils"] }
 [package]
-name = "Stoken"
+name = "impact-contract"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+license = "MIT"
+publish = false
+
+[lib]
+crate-type = ["cdylib"]   # gera o .wasm para deploy no Soroban
 
 [dependencies]
+soroban-sdk = "21.0.0"        # versão atualizada do SDK (ajustar à release do hackathon)
+soroban-token-sdk = "21.0.0"  # para criar/gerenciar tokens
